@@ -45,7 +45,6 @@
     
     for (int i = 0; i < 10; i++) {
         [randomQuestions addObject:[allQuestions objectAtIndex:[[questionNumbers objectAtIndex:i] intValue]]];
-        NSLog(@"Question #%@", [questionNumbers objectAtIndex:i]);
     }
     
     return randomQuestions;
