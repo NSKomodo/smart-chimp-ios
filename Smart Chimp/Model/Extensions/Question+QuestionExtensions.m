@@ -8,6 +8,7 @@
 
 #import "Question+QuestionExtensions.h"
 #import "AppDelegate.h"
+#import "NSMutableArray+NSMutableArrayExtensions.h"
 
 @implementation Question (QuestionExtensions)
 
@@ -32,21 +33,22 @@
 }
 
 + (NSArray *)randomQuestions {
+    NSMutableArray *questionNumbers = [NSMutableArray array];
     NSArray *allQuestions = [self allQuestions];
-    NSMutableArray *questions = [NSMutableArray array];
+    NSMutableArray *randomQuestions = [NSMutableArray array];
     
-    if (allQuestions) {
-        for (int i = 0; i < 10; i++) {
-            int totalQuestions = (int)allQuestions.count;
-            int random = arc4random_uniform(totalQuestions);
-            
-            [questions addObject:[allQuestions objectAtIndex:random]];
-        }
-        
-        return questions;
+    for (int i = 0; i < allQuestions.count; i++) {
+        [questionNumbers addObject:[NSNumber numberWithInt:i]];
     }
     
-    return nil;
+    [questionNumbers shuffle];
+    
+    for (int i = 0; i < 10; i++) {
+        [randomQuestions addObject:[allQuestions objectAtIndex:[[questionNumbers objectAtIndex:i] intValue]]];
+        NSLog(@"Question #%@", [questionNumbers objectAtIndex:i]);
+    }
+    
+    return randomQuestions;
 }
 
 + (NSArray *)answersForQuestion:(Question *)question {

@@ -33,6 +33,7 @@
 		6CAD0D521A74496B00A64403 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD0D511A74496B00A64403 /* Answer.m */; };
 		6CAD0D551A74496B00A64403 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD0D541A74496B00A64403 /* Question.m */; };
 		6CAD0D581A74496B00A64403 /* HighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD0D571A74496B00A64403 /* HighScore.m */; };
+		6CEB74C31A8DAE4B009F9F5B /* NSMutableArray+NSMutableArrayExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB74C21A8DAE4B009F9F5B /* NSMutableArray+NSMutableArrayExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,8 @@
 		6CAD0D541A74496B00A64403 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
 		6CAD0D561A74496B00A64403 /* HighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScore.h; sourceTree = "<group>"; };
 		6CAD0D571A74496B00A64403 /* HighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScore.m; sourceTree = "<group>"; };
+		6CEB74C11A8DAE4B009F9F5B /* NSMutableArray+NSMutableArrayExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+NSMutableArrayExtensions.h"; sourceTree = "<group>"; };
+		6CEB74C21A8DAE4B009F9F5B /* NSMutableArray+NSMutableArrayExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+NSMutableArrayExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,7 @@
 			children = (
 				6C5D9E891A74AC8300312A57 /* Audio Manager */,
 				6CAD0D461A7446C300A64403 /* Model */,
+				6CEB74C01A8DAE27009F9F5B /* Extensions */,
 				6C16B9351A6B0C0500D4BBC6 /* AppDelegate.h */,
 				6C16B9361A6B0C0500D4BBC6 /* AppDelegate.m */,
 				6C16B93B1A6B0C0500D4BBC6 /* MenuViewController.h */,
@@ -221,6 +225,15 @@
 				6CAD0D511A74496B00A64403 /* Answer.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6CEB74C01A8DAE27009F9F5B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6CEB74C11A8DAE4B009F9F5B /* NSMutableArray+NSMutableArrayExtensions.h */,
+				6CEB74C21A8DAE4B009F9F5B /* NSMutableArray+NSMutableArrayExtensions.m */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CEB74C31A8DAE4B009F9F5B /* NSMutableArray+NSMutableArrayExtensions.m in Sources */,
 				6CAD0D581A74496B00A64403 /* HighScore.m in Sources */,
 				6C167EEE1A76F5E200E226CD /* Question+QuestionExtensions.m in Sources */,
 				6C16B93A1A6B0C0500D4BBC6 /* Smart_Chimp.xcdatamodeld in Sources */,
