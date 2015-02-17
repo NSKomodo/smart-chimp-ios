@@ -338,7 +338,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="QUIT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQb-Le-7Gz">
                                         <rect key="frame" x="68" y="11" width="46" height="21"/>
                                         <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
-                                        <color key="textColor" red="1" green="0.67915183869999995" blue="0.136768164" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="0.67843137254901964" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SmartChimpLogo" translatesAutoresizingMaskIntoConstraints="NO" id="HxK-e1-Kak">
@@ -356,23 +356,25 @@
                                     <constraint firstAttribute="height" constant="60" id="s0M-C8-1Id"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBy-Cs-ngG">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBy-Cs-ngG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoseBG" translatesAutoresizingMaskIntoConstraints="NO" id="JcJ-B6-Zht">
                                         <rect key="frame" x="-4" y="0.0" width="324" height="568"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BananaPeel" translatesAutoresizingMaskIntoConstraints="NO" id="QZg-hb-RME">
-                                        <rect key="frame" x="74" y="450" width="173" height="110"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOU LOST! Better luch next time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0u-5T-per">
-                                        <rect key="frame" x="52" y="335" width="216" height="49.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="YOU LOST! Better luck next time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0u-5T-per">
+                                        <rect key="frame" x="52" y="258" width="216" height="49.5"/>
                                         <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jl1-rO-CyH">
-                                        <rect key="frame" x="34" y="392" width="252" height="50"/>
+                                        <rect key="frame" x="34" y="315" width="252" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="PkL-9q-7si"/>
+                                            <constraint firstAttribute="width" constant="252" id="f8a-8B-fYb"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="25"/>
                                         <state key="normal" title="MAIN MENU" backgroundImage="MainMenuButton">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -382,20 +384,35 @@
                                             <action selector="mainMenuAction:" destination="Yr5-cT-ikA" eventType="touchUpInside" id="eMV-sH-TaL"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BananaPeel" translatesAutoresizingMaskIntoConstraints="NO" id="QZg-hb-RME">
+                                        <rect key="frame" x="72" y="398" width="173" height="110"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="QZg-hb-RME" secondAttribute="centerX" constant="1.5" id="3Wq-Ez-8ec"/>
+                                    <constraint firstItem="Jl1-rO-CyH" firstAttribute="top" secondItem="N0u-5T-per" secondAttribute="bottom" constant="7.5" id="5hz-44-eBM"/>
                                     <constraint firstAttribute="centerX" secondItem="QZg-hb-RME" secondAttribute="centerX" constant="-0.5" id="DXJ-V4-1oh"/>
                                     <constraint firstAttribute="bottom" secondItem="Jl1-rO-CyH" secondAttribute="bottom" constant="126" id="HKN-lP-c5F"/>
-                                    <constraint firstAttribute="centerX" secondItem="N0u-5T-per" secondAttribute="centerX" constant="-0.5" id="KE8-lr-yoP"/>
+                                    <constraint firstAttribute="centerY" secondItem="N0u-5T-per" secondAttribute="centerY" constant="1.25" id="MOD-U2-Rqh"/>
                                     <constraint firstAttribute="bottom" secondItem="QZg-hb-RME" secondAttribute="bottom" constant="8" id="Mgk-qs-AwB"/>
                                     <constraint firstAttribute="centerX" secondItem="JcJ-B6-Zht" secondAttribute="centerX" constant="2" id="UyN-bl-JPB"/>
                                     <constraint firstItem="JcJ-B6-Zht" firstAttribute="width" secondItem="ZBy-Cs-ngG" secondAttribute="width" constant="4" id="WMo-Ee-8hR"/>
+                                    <constraint firstAttribute="centerX" secondItem="Jl1-rO-CyH" secondAttribute="centerX" id="Xvd-4G-A3c"/>
                                     <constraint firstAttribute="centerY" secondItem="JcJ-B6-Zht" secondAttribute="centerY" id="Zvd-N2-hUj"/>
                                     <constraint firstAttribute="centerX" secondItem="Jl1-rO-CyH" secondAttribute="centerX" id="iuU-GP-vo9"/>
-                                    <constraint firstItem="Jl1-rO-CyH" firstAttribute="top" secondItem="N0u-5T-per" secondAttribute="bottom" constant="7" id="jUa-W5-xjw"/>
+                                    <constraint firstAttribute="centerX" secondItem="N0u-5T-per" secondAttribute="centerX" id="mjm-wv-ub6"/>
                                     <constraint firstItem="JcJ-B6-Zht" firstAttribute="height" secondItem="ZBy-Cs-ngG" secondAttribute="height" id="tq4-yw-GA3"/>
+                                    <constraint firstItem="QZg-hb-RME" firstAttribute="top" secondItem="Jl1-rO-CyH" secondAttribute="bottom" constant="33" id="zIt-rN-Chd"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="HKN-lP-c5F"/>
+                                        <exclude reference="iuU-GP-vo9"/>
+                                        <exclude reference="DXJ-V4-1oh"/>
+                                        <exclude reference="Mgk-qs-AwB"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.035294117649999998" green="0.62745098040000002" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -660,7 +677,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vk-gp-Z8i">
                                 <rect key="frame" x="16" y="83" width="288" height="412"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <string key="text">Smart Chimp: The Critical Thinking Mokeybot is a game developed at Full Sail University as final project for the course Psychology of Play, taught by Miss Gertie Williams on January 2015.  Group "The Monk3yb0ts" members:  Jorge Tapia Programming  Mark Houston UI/UX Design  Gabriel Figarella UI/UX Design  Alfonso Figueroa Music/SFX  Larry Abril Project Management  Benjamin Meily Academic Research  Chad Ramkhelawan Academic Research  Juan González Academic Research</string>
+                                <mutableString key="text">Smart Chimp: The Critical Thinking Mokeybot is a game developed at Full Sail University as final project for the course Psychology of Play, taught by Miss Gertie Williams on January 2015.  Group "The Monk3yb0ts" members:  Jorge Tapia Programming  Mark Houston UI/UX Design  Gabriel Figarella UI/UX Design  Alfonso Figueroa Music/SFX  Larry Abril Project Management  Benjamin Meily Academic Research  Chad Ramkhelawan Academic Research  Juan González Academic Research</mutableString>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

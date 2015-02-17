@@ -168,19 +168,19 @@
         question5.question_text = @"There are 3 apples and you take away 2. How many do you have?";
         
         Answer *answer5_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer5_1.answer_text = @"Two";
-        answer5_1.is_correct = @YES;
+        answer5_1.answer_text = @"One";
+        answer5_1.is_correct = @NO;
         
         Answer *answer5_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer5_2.answer_text = @"The oil burner";
-        answer5_2.is_correct = @NO;
+        answer5_2.answer_text = @"Two";
+        answer5_2.is_correct = @YES;
         
         Answer *answer5_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer5_3.answer_text = @"What you had when you walked into the room";
+        answer5_3.answer_text = @"Three";
         answer5_3.is_correct = @NO;
         
         Answer *answer5_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer5_4.answer_text = @"The wood burning stove";
+        answer5_4.answer_text = @"None";
         answer5_4.is_correct = @NO;
         
         [question5 addAnswer:[NSSet setWithObjects:answer5_1, answer5_2, answer5_3, answer5_4, nil]];
