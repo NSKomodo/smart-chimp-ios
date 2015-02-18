@@ -356,7 +356,7 @@
                                     <constraint firstAttribute="height" constant="60" id="s0M-C8-1Id"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBy-Cs-ngG">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBy-Cs-ngG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoseBG" translatesAutoresizingMaskIntoConstraints="NO" id="JcJ-B6-Zht">

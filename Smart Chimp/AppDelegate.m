@@ -49,259 +49,250 @@
 }
 
 - (void)setupQuestionsAndAnswers {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL hasLaunchedBefore = [[defaults objectForKey:@"hasLaunchedBefore"] boolValue];
+    // Obtain Core Data context
+    NSManagedObjectContext *context = [self managedObjectContext];
     
-    if (!hasLaunchedBefore) {
-        // Obtain Core Data context
-        NSManagedObjectContext *context = [self managedObjectContext];
-        
-        // Empty questions and answers as initial setup
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init]; NSEntityDescription *entity = [NSEntityDescription entityForName:@"Question" inManagedObjectContext:context];
-        [fetchRequest setEntity:entity];
-        NSError *error = nil;
-        NSArray *items = [context executeFetchRequest:fetchRequest error:&error];
-        
-        if (error) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-        
-        for (Question *question in items) {
-            [context deleteObject:question];
-        }
-        
-        [self saveContext];
-        
-        // Pre-populate questions and answers
-        
-        // Question #1
-        Question *question1 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question1.question_text = @"Critical Thinking is ________";
-        
-        Answer *answer1_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer1_1.answer_text = @"A process doctors use to determine diseases";
-        answer1_1.is_correct = @NO;
-        
-        Answer *answer1_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer1_2.answer_text = @"Study of clear, reasoned thinking";
-        answer1_2.is_correct = @YES;
-        
-        Answer *answer1_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer1_3.answer_text = @"Mashing of ideas that produce clear thoughts";
-        answer1_3.is_correct = @NO;
-        
-        Answer *answer1_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer1_4.answer_text = @"Thought process that leads to clear ideas";
-        answer1_4.is_correct = @NO;
-        
-        [question1 addAnswer:[NSSet setWithObjects:answer1_1, answer1_2, answer1_3, answer1_4, nil]];
-        
-        // Question #2
-        Question *question2 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question2.question_text = @"How many ways is it possible to color the faces of a six sided cube white?";
-        
-        Answer *answer2_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer2_1.answer_text = @"Seven";
-        answer2_1.is_correct = @NO;
-        
-        Answer *answer2_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer2_2.answer_text = @"Nine";
-        answer2_2.is_correct = @NO;
-        
-        Answer *answer2_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer2_3.answer_text = @"Thirteen";
-        answer2_3.is_correct = @NO;
-        
-        Answer *answer2_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer2_4.answer_text = @"Eleven";
-        answer2_4.is_correct = @YES;
-        
-        [question2 addAnswer:[NSSet setWithObjects:answer2_1, answer2_2, answer2_3, answer2_4, nil]];
-        
-        // Question #3
-        Question *question3 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question3.question_text = @"A 4x4 planting density per acre is twice as many trees as an 8x8 spacing";
-        
-        Answer *answer3_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer3_1.answer_text = @"True";
-        answer3_1.is_correct = @NO;
-        
-        Answer *answer3_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer3_2.answer_text = @"False";
-        answer3_2.is_correct = @YES;
-        
-        Answer *answer3_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer3_3.answer_text = @"Both";
-        answer3_3.is_correct = @NO;
-        
-        Answer *answer3_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer3_4.answer_text = @"Neither";
-        answer3_4.is_correct = @NO;
-        
-        [question3 addAnswer:[NSSet setWithObjects:answer3_1, answer3_2, answer3_3, answer3_4, nil]];
-        
-        // Question #4
-        Question *question4 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question4.question_text = @"If you only had one match and you walked into a room where there was an oil burner, a kerosene lamp, and a wood burning stove, what would you light first?";
-        
-        Answer *answer4_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer4_1.answer_text = @"Kerosene lamp";
-        answer4_1.is_correct = @NO;
-        
-        Answer *answer4_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer4_2.answer_text = @"The oil burner";
-        answer4_2.is_correct = @NO;
-        
-        Answer *answer4_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer4_3.answer_text = @"What you had when you walked into the room";
-        answer4_3.is_correct = @YES;
-        
-        Answer *answer4_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer4_4.answer_text = @"The wood burning stove";
-        answer4_4.is_correct = @NO;
-        
-        [question4 addAnswer:[NSSet setWithObjects:answer4_1, answer4_2, answer4_3, answer4_4, nil]];
-        
-        // Question #5
-        Question *question5 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question5.question_text = @"There are 3 apples and you take away 2. How many do you have?";
-        
-        Answer *answer5_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer5_1.answer_text = @"One";
-        answer5_1.is_correct = @NO;
-        
-        Answer *answer5_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer5_2.answer_text = @"Two";
-        answer5_2.is_correct = @YES;
-        
-        Answer *answer5_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer5_3.answer_text = @"Three";
-        answer5_3.is_correct = @NO;
-        
-        Answer *answer5_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer5_4.answer_text = @"None";
-        answer5_4.is_correct = @NO;
-        
-        [question5 addAnswer:[NSSet setWithObjects:answer5_1, answer5_2, answer5_3, answer5_4, nil]];
-        
-        // Question #6
-        Question *question6 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question6.question_text = @"Two women play five games of checkers. Each woman wins the same number of games. There are no ties. Explain this.";
-        
-        Answer *answer6_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer6_1.answer_text = @"They are not wearing ties";
-        answer6_1.is_correct = @NO;
-        
-        Answer *answer6_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer6_2.answer_text = @"Women are not playing each other";
-        answer6_2.is_correct = @YES;
-        
-        Answer *answer6_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer6_3.answer_text = @"Women do not wear ties";
-        answer6_3.is_correct = @NO;
-        
-        Answer *answer6_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer6_4.answer_text = @"They are playing men";
-        answer6_4.is_correct = @NO;
-        
-        [question6 addAnswer:[NSSet setWithObjects:answer6_1, answer6_2, answer6_3, answer6_4, nil]];
-        
-        // Question #7
-        Question *question7 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question7.question_text = @"A woman gives a beggar 50 cents, the woman is the beggar’s sister, but the beggar is not the woman’s brother. How come?";
-        
-        Answer *answer7_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer7_1.answer_text = @"The woman is the beggar";
-        answer7_1.is_correct = @NO;
-        
-        Answer *answer7_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer7_2.answer_text = @"The beggar is an in-law";
-        answer7_2.is_correct = @NO;
-        
-        Answer *answer7_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer7_3.answer_text = @"The beggar is the woman’s sister";
-        answer7_3.is_correct = @YES;
-        
-        Answer *answer7_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer7_4.answer_text = @"Not possible";
-        answer7_4.is_correct = @NO;
-        
-        [question7 addAnswer:[NSSet setWithObjects:answer7_1, answer7_2, answer7_3, answer7_4, nil]];
-        
-        // Question #8
-        Question *question8 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question8.question_text = @"If a cat jumped out of a hat onto a doormat then sat on a ledge next to a school thinking he was in New York sitting on top of the Empire State building, where is the cat?";
-        
-        Answer *answer8_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer8_1.answer_text = @"On the doormat";
-        answer8_1.is_correct = @NO;
-        
-        Answer *answer8_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer8_2.answer_text = @"On the ledge";
-        answer8_2.is_correct = @YES;
-        
-        Answer *answer8_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer8_3.answer_text = @"New York";
-        answer8_3.is_correct = @NO;
-        
-        Answer *answer8_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer8_4.answer_text = @"Empire State Building";
-        answer8_4.is_correct = @NO;
-        
-        [question8 addAnswer:[NSSet setWithObjects:answer8_1, answer8_2, answer8_3, answer8_4, nil]];
-        
-        // Question #9
-        Question *question9 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question9.question_text = @"Two mothers and two daughters walk into a store. They have 21 dollars. How is it possible to split it equally without any cents (in whole dollars)?";
-        
-        Answer *answer9_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer9_1.answer_text = @"They get $7 each";
-        answer9_1.is_correct = @YES;
-        
-        Answer *answer9_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer9_2.answer_text = @"They get $5.40 each";
-        answer9_2.is_correct = @NO;
-        
-        Answer *answer9_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer9_3.answer_text = @"They get $6 each";
-        answer9_3.is_correct = @NO;
-        
-        Answer *answer9_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer9_4.answer_text = @"Not Possible";
-        answer9_4.is_correct = @NO;
-        
-        [question9 addAnswer:[NSSet setWithObjects:answer9_1, answer9_2, answer9_3, answer9_4, nil]];
-        
-        // Question #10
-        Question *question10 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-        question10.question_text = @"Divide 30 by half and add 10. What is the answer?";
-        
-        Answer *answer10_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer10_1.answer_text = @"15";
-        answer10_1.is_correct = @NO;
-        
-        Answer *answer10_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer10_2.answer_text = @"25";
-        answer10_2.is_correct = @NO;
-        
-        Answer *answer10_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer10_3.answer_text = @"30";
-        answer10_3.is_correct = @NO;
-        
-        Answer *answer10_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-        answer10_4.answer_text = @"70";
-        answer10_4.is_correct = @YES;
-        
-        [question10 addAnswer:[NSSet setWithObjects:answer10_1, answer10_2, answer10_3, answer10_4, nil]];
-        
-        // Save user defaults
-        [defaults setObject:@YES forKey:@"hasLaunchedBefore"];
-        [defaults synchronize];
-        
-        // Save context after all questions and answers are set
-        [self saveContext];
+    // Empty questions and answers as initial setup
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init]; NSEntityDescription *entity = [NSEntityDescription entityForName:@"Question" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error = nil;
+    NSArray *items = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if (error) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
     }
+    
+    for (Question *question in items) {
+        [context deleteObject:question];
+    }
+    
+    [self saveContext];
+    
+    // Pre-populate questions and answers
+    
+    // Question #1
+    Question *question1 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question1.question_text = @"Critical Thinking is ________";
+    
+    Answer *answer1_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer1_1.answer_text = @"A process doctors use to determine diseases";
+    answer1_1.is_correct = @NO;
+    
+    Answer *answer1_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer1_2.answer_text = @"Study of clear, reasoned thinking";
+    answer1_2.is_correct = @YES;
+    
+    Answer *answer1_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer1_3.answer_text = @"Mashing of ideas that produce clear thoughts";
+    answer1_3.is_correct = @NO;
+    
+    Answer *answer1_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer1_4.answer_text = @"Thought process that leads to clear ideas";
+    answer1_4.is_correct = @NO;
+    
+    [question1 addAnswer:[NSSet setWithObjects:answer1_1, answer1_2, answer1_3, answer1_4, nil]];
+    
+    // Question #2
+    Question *question2 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question2.question_text = @"How many ways is it possible to color the faces of a six sided cube white?";
+    
+    Answer *answer2_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer2_1.answer_text = @"Seven";
+    answer2_1.is_correct = @NO;
+    
+    Answer *answer2_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer2_2.answer_text = @"Nine";
+    answer2_2.is_correct = @NO;
+    
+    Answer *answer2_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer2_3.answer_text = @"Thirteen";
+    answer2_3.is_correct = @NO;
+    
+    Answer *answer2_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer2_4.answer_text = @"Eleven";
+    answer2_4.is_correct = @YES;
+    
+    [question2 addAnswer:[NSSet setWithObjects:answer2_1, answer2_2, answer2_3, answer2_4, nil]];
+    
+    // Question #3
+    Question *question3 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question3.question_text = @"A 4x4 planting density per acre is twice as many trees as an 8x8 spacing";
+    
+    Answer *answer3_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer3_1.answer_text = @"True";
+    answer3_1.is_correct = @NO;
+    
+    Answer *answer3_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer3_2.answer_text = @"False";
+    answer3_2.is_correct = @YES;
+    
+    Answer *answer3_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer3_3.answer_text = @"Both";
+    answer3_3.is_correct = @NO;
+    
+    Answer *answer3_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer3_4.answer_text = @"Neither";
+    answer3_4.is_correct = @NO;
+    
+    [question3 addAnswer:[NSSet setWithObjects:answer3_1, answer3_2, answer3_3, answer3_4, nil]];
+    
+    // Question #4
+    Question *question4 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question4.question_text = @"If you only had one match and you walked into a room where there was an oil burner, a kerosene lamp, and a wood burning stove, what would you light first?";
+    
+    Answer *answer4_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer4_1.answer_text = @"Kerosene lamp";
+    answer4_1.is_correct = @NO;
+    
+    Answer *answer4_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer4_2.answer_text = @"The oil burner";
+    answer4_2.is_correct = @NO;
+    
+    Answer *answer4_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer4_3.answer_text = @"What you had when you walked into the room";
+    answer4_3.is_correct = @YES;
+    
+    Answer *answer4_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer4_4.answer_text = @"The wood burning stove";
+    answer4_4.is_correct = @NO;
+    
+    [question4 addAnswer:[NSSet setWithObjects:answer4_1, answer4_2, answer4_3, answer4_4, nil]];
+    
+    // Question #5
+    Question *question5 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question5.question_text = @"There are 3 apples and you take away 2. How many do you have?";
+    
+    Answer *answer5_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer5_1.answer_text = @"One";
+    answer5_1.is_correct = @NO;
+    
+    Answer *answer5_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer5_2.answer_text = @"Two";
+    answer5_2.is_correct = @YES;
+    
+    Answer *answer5_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer5_3.answer_text = @"Three";
+    answer5_3.is_correct = @NO;
+    
+    Answer *answer5_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer5_4.answer_text = @"None";
+    answer5_4.is_correct = @NO;
+    
+    [question5 addAnswer:[NSSet setWithObjects:answer5_1, answer5_2, answer5_3, answer5_4, nil]];
+    
+    // Question #6
+    Question *question6 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question6.question_text = @"Two women play five games of checkers. Each woman wins the same number of games. There are no ties. Explain this.";
+    
+    Answer *answer6_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer6_1.answer_text = @"They are not wearing ties";
+    answer6_1.is_correct = @NO;
+    
+    Answer *answer6_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer6_2.answer_text = @"Women are not playing each other";
+    answer6_2.is_correct = @YES;
+    
+    Answer *answer6_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer6_3.answer_text = @"Women do not wear ties";
+    answer6_3.is_correct = @NO;
+    
+    Answer *answer6_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer6_4.answer_text = @"They are playing men";
+    answer6_4.is_correct = @NO;
+    
+    [question6 addAnswer:[NSSet setWithObjects:answer6_1, answer6_2, answer6_3, answer6_4, nil]];
+    
+    // Question #7
+    Question *question7 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question7.question_text = @"A woman gives a beggar 50 cents, the woman is the beggar’s sister, but the beggar is not the woman’s brother. How come?";
+    
+    Answer *answer7_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer7_1.answer_text = @"The woman is the beggar";
+    answer7_1.is_correct = @NO;
+    
+    Answer *answer7_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer7_2.answer_text = @"The beggar is an in-law";
+    answer7_2.is_correct = @NO;
+    
+    Answer *answer7_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer7_3.answer_text = @"The beggar is the woman’s sister";
+    answer7_3.is_correct = @YES;
+    
+    Answer *answer7_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer7_4.answer_text = @"Not possible";
+    answer7_4.is_correct = @NO;
+    
+    [question7 addAnswer:[NSSet setWithObjects:answer7_1, answer7_2, answer7_3, answer7_4, nil]];
+    
+    // Question #8
+    Question *question8 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question8.question_text = @"If a cat jumped out of a hat onto a doormat then sat on a ledge next to a school thinking he was in New York sitting on top of the Empire State building, where is the cat?";
+    
+    Answer *answer8_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer8_1.answer_text = @"On the doormat";
+    answer8_1.is_correct = @NO;
+    
+    Answer *answer8_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer8_2.answer_text = @"On the ledge";
+    answer8_2.is_correct = @YES;
+    
+    Answer *answer8_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer8_3.answer_text = @"New York";
+    answer8_3.is_correct = @NO;
+    
+    Answer *answer8_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer8_4.answer_text = @"Empire State Building";
+    answer8_4.is_correct = @NO;
+    
+    [question8 addAnswer:[NSSet setWithObjects:answer8_1, answer8_2, answer8_3, answer8_4, nil]];
+    
+    // Question #9
+    Question *question9 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question9.question_text = @"Two mothers and two daughters walk into a store. They have 21 dollars. How is it possible to split it equally without any cents (in whole dollars)?";
+    
+    Answer *answer9_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer9_1.answer_text = @"They get $7 each";
+    answer9_1.is_correct = @YES;
+    
+    Answer *answer9_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer9_2.answer_text = @"They get $5.40 each";
+    answer9_2.is_correct = @NO;
+    
+    Answer *answer9_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer9_3.answer_text = @"They get $6 each";
+    answer9_3.is_correct = @NO;
+    
+    Answer *answer9_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer9_4.answer_text = @"Not Possible";
+    answer9_4.is_correct = @NO;
+    
+    [question9 addAnswer:[NSSet setWithObjects:answer9_1, answer9_2, answer9_3, answer9_4, nil]];
+    
+    // Question #10
+    Question *question10 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
+    question10.question_text = @"Divide 30 by half and add 10. What is the answer?";
+    
+    Answer *answer10_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer10_1.answer_text = @"15";
+    answer10_1.is_correct = @NO;
+    
+    Answer *answer10_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer10_2.answer_text = @"25";
+    answer10_2.is_correct = @NO;
+    
+    Answer *answer10_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer10_3.answer_text = @"30";
+    answer10_3.is_correct = @NO;
+    
+    Answer *answer10_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
+    answer10_4.answer_text = @"70";
+    answer10_4.is_correct = @YES;
+    
+    [question10 addAnswer:[NSSet setWithObjects:answer10_1, answer10_2, answer10_3, answer10_4, nil]];
+    
+    // Save context after all questions and answers are set
+    [self saveContext];
 }
 
 #pragma mark - Core Data stack
