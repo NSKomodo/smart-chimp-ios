@@ -73,22 +73,22 @@
     
     // Question #1
     Question *question1 = [NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:context];
-    question1.question_text = @"Critical Thinking is ________";
+    question1.question_text = @"What's the probability of picking an ace of spades out of a brand new deck without jokers?";
     
     Answer *answer1_1 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-    answer1_1.answer_text = @"A process doctors use to determine diseases";
+    answer1_1.answer_text = @"1/52";
     answer1_1.is_correct = @NO;
     
     Answer *answer1_2 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-    answer1_2.answer_text = @"Study of clear, reasoned thinking";
+    answer1_2.answer_text = @"100%";
     answer1_2.is_correct = @YES;
     
     Answer *answer1_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-    answer1_3.answer_text = @"Mashing of ideas that produce clear thoughts";
+    answer1_3.answer_text = @"4/52";
     answer1_3.is_correct = @NO;
     
     Answer *answer1_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
-    answer1_4.answer_text = @"Thought process that leads to clear ideas";
+    answer1_4.answer_text = @"50%";
     answer1_4.is_correct = @NO;
     
     [question1 addAnswer:[NSSet setWithObjects:answer1_1, answer1_2, answer1_3, answer1_4, nil]];
