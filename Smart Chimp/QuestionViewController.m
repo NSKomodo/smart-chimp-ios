@@ -45,7 +45,9 @@
 
 - (void)loadQuestion:(Question *)question {
     self.answers = [Question answersForQuestion:[self.questionsForGame objectAtIndex:self.currentQuestion]];
-    [self.questionTextView setText:question.question_text];
+    
+    NSString *questionText = [NSString stringWithFormat:@"QUESTION #%d:\n%@", (self.currentQuestion + 1), question.question_text];
+    [self.questionTextView setText:questionText];
     
     Answer *answer1 = [self.answers objectAtIndex:0];
     Answer *answer2 = [self.answers objectAtIndex:1];

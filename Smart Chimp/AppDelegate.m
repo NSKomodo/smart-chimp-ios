@@ -293,6 +293,8 @@
     
     // Save context after all questions and answers are set
     [self saveContext];
+    
+    NSLog(@"Data setup complete.");
 }
 
 #pragma mark - Core Data stack
