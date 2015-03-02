@@ -40,8 +40,6 @@
     self.correctQuestions = 0;
     self.bananasEarned = 0;
     
-    [self.questionTextView flashScrollIndicators];
-    
     [self loadQuestion:[self.questionsForGame objectAtIndex:self.currentQuestion]];
 }
 
@@ -69,6 +67,7 @@
     [self.answer4Button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     [self.view setUserInteractionEnabled:YES];
+    [self.questionTextView flashScrollIndicators];
 }
 
 - (void)updateCorrectText {

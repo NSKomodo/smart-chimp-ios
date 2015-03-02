@@ -674,8 +674,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vk-gp-Z8i">
-                                <rect key="frame" x="16" y="83" width="288" height="722.5"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vk-gp-Z8i">
+                                <rect key="frame" x="16" y="83" width="288" height="412"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Smart Chimp: The Critical Thinking Monkeybot is a game developed at Full Sail University as final project for the course Psychology of Play, taught by Miss Gertie Williams on January 2015.  Group "The Monk3yb0ts" members:  Jorge Tapia Programming  Mark Houston UI/UX Design  Gabriel Figarella UI/UX Design  Alfonso Figueroa Music/SFX  Larry Abril Project Management  Benjamin Meily Academic Research  Chad Ramkhelawan Academic Research  Juan González Academic Research</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
