@@ -40,6 +40,8 @@
     self.correctQuestions = 0;
     self.bananasEarned = 0;
     
+    [self.questionTextView flashScrollIndicators];
+    
     [self loadQuestion:[self.questionsForGame objectAtIndex:self.currentQuestion]];
 }
 
@@ -55,9 +57,18 @@
     Answer *answer4 = [self.answers objectAtIndex:3];
     
     [self.answer1Button setTitle:answer1.answer_text forState:UIControlStateNormal];
+    [self.answer1Button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     [self.answer2Button setTitle:answer2.answer_text forState:UIControlStateNormal];
+    [self.answer2Button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     [self.answer3Button setTitle:answer3.answer_text forState:UIControlStateNormal];
+    [self.answer3Button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     [self.answer4Button setTitle:answer4.answer_text forState:UIControlStateNormal];
+    [self.answer4Button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [self.view setUserInteractionEnabled:YES];
 }
 
 - (void)updateCorrectText {
@@ -68,7 +79,40 @@
     [self.bananaLabel setText:[NSString stringWithFormat:@"x%d", self.bananasEarned]];
 }
 
-- (void)processAnswer:(Answer *)answer {
+- (void)correctQuestionFromSender:(id) sender {
+    UIButton *buttonPressed = sender;
+    [buttonPressed setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    
+    for (int i = 0; i < self.answers.count; i++) {
+        Answer *answer = [self.answers objectAtIndex:i];
+        if ([answer.is_correct boolValue]) {
+            switch (i) {
+                case 0:
+                    [self.answer1Button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+                    break;
+                    
+                case 1:
+                    [self.answer2Button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+                    break;
+                    
+                case 2:
+                    [self.answer3Button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+                    break;
+                    
+                case 3:
+                    [self.answer4Button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+    
+    [self.view setUserInteractionEnabled:NO];
+}
+
+- (void)processAnswer:(Answer *)answer fromSender:(id)sender {
     if ([answer.is_correct boolValue]) {
         ++self.currentQuestion;
         ++self.correctQuestions;
@@ -83,35 +127,24 @@
             [self loadQuestion:[self.questionsForGame objectAtIndex:self.currentQuestion]];
         } else {
             if (self.correctQuestions >= 7) {
-                [self.winLoseImageView setImage:[UIImage imageNamed:@"WinBG"]];
-                [self.winLoseLabel setText:@"CONGRATULATIONS\nYou win"];
-                [self.bananaPeelImageView setAlpha:0.0];
-                [self.winLoseView setHidden:NO];
+                [self performSelector:@selector(showGameOverScreenForResult:) withObject:@YES afterDelay:3];
             } else {
-                [self.winLoseImageView setImage:[UIImage imageNamed:@"LoseBG"]];
-                [self.winLoseLabel setText:@"YOU LOSE\nBetter luck next time"];
-                [self.bananaPeelImageView setHidden:NO];
-                [self.winLoseView setHidden:NO];
+                [self performSelector:@selector(showGameOverScreenForResult:) withObject:nil afterDelay:3];
             }
         }
     } else {
         ++self.currentQuestion;
+        [self correctQuestionFromSender:sender];
         
         [self.audioManager playButtonSound];
         
         if (self.currentQuestion < 10) {
-            [self loadQuestion:[self.questionsForGame objectAtIndex:self.currentQuestion]];
+            [self performSelector:@selector(loadQuestion:) withObject:[self.questionsForGame objectAtIndex:self.currentQuestion] afterDelay:3];
         } else {
             if (self.correctQuestions >= 7) {
-                [self.winLoseImageView setImage:[UIImage imageNamed:@"WinBG"]];
-                [self.winLoseLabel setText:@"CONGRATULATIONS\nYou win"];
-                [self.bananaPeelImageView setAlpha:0.0];
-                [self.winLoseView setHidden:NO];
+                [self performSelector:@selector(showGameOverScreenForResult:) withObject:@YES afterDelay:3];
             } else {
-                [self.winLoseImageView setImage:[UIImage imageNamed:@"LoseBG"]];
-                [self.winLoseLabel setText:@"YOU LOST!\nBetter luck next time"];
-                [self.bananaPeelImageView setHidden:NO];
-                [self.winLoseView setHidden:NO];
+                [self performSelector:@selector(showGameOverScreenForResult:) withObject:nil afterDelay:3];
             }
         }
     }
@@ -129,6 +162,22 @@
     }
 }
 
+- (void)showGameOverScreenForResult:(id)won {
+    [self.view setUserInteractionEnabled:YES];
+    
+    if (won) {
+        [self.winLoseImageView setImage:[UIImage imageNamed:@"WinBG"]];
+        [self.winLoseLabel setText:@"CONGRATULATIONS\nYou win"];
+        [self.bananaPeelImageView setAlpha:0.0];
+        [self.winLoseView setHidden:NO];
+    } else {
+        [self.winLoseImageView setImage:[UIImage imageNamed:@"LoseBG"]];
+        [self.winLoseLabel setText:@"YOU LOST!\nBetter luck next time"];
+        [self.bananaPeelImageView setHidden:NO];
+        [self.winLoseView setHidden:NO];
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)dismissAction:(id)sender {
@@ -141,22 +190,22 @@
 
 - (IBAction)answer1Action:(id)sender {
     Answer *answer1 = [self.answers objectAtIndex:0];
-    [self processAnswer:answer1];
+    [self processAnswer:answer1 fromSender:sender];
 }
 
 - (IBAction)answer2Action:(id)sender {
     Answer *answer2 = [self.answers objectAtIndex:1];
-    [self processAnswer:answer2];
+    [self processAnswer:answer2 fromSender:sender];
 }
 
 - (IBAction)answer3Action:(id)sender {
     Answer *answer3 = [self.answers objectAtIndex:2];
-    [self processAnswer:answer3];
+    [self processAnswer:answer3 fromSender:sender];
 }
 
 - (IBAction)answer4Action:(id)sender {
     Answer *answer4 = [self.answers objectAtIndex:3];
-    [self processAnswer:answer4];
+    [self processAnswer:answer4 fromSender:sender];
 }
 
 #pragma mark - Key-value observing
