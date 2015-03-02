@@ -877,7 +877,7 @@
     
     Answer *answer37_3 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
     answer37_3.answer_text = @"A soap bar";
-    answer37_3.is_correct = @YES;
+    answer37_3.is_correct = @NO;
     
     Answer *answer37_4 = [NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:[self managedObjectContext]];
     answer37_4.answer_text = @"The Titanic";
