@@ -58,7 +58,7 @@
         
         //[fbController addImage:[UIImage imageNamed:@"1.jpg"]];
         [fbController setInitialText:@"Testing my Critical Thinking skills with Smart Chimp, by The Monk3yb0ts. Available on the App Store!"];
-        [fbController addURL:[NSURL URLWithString:@"http://facebook.com"]];
+        [fbController addURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/smart-chimp-critical-thinking/id972549995?ls=1&mt=8"]];
         [fbController setCompletionHandler:completionHandler];
         
         [self presentViewController:fbController animated:YES completion:nil];
@@ -88,7 +88,7 @@
         
         // [twitterController addImage:[UIImage imageNamed:@"1.jpg"]];
         [twitterController setInitialText:@"Testing my #CriticalThinking skills with #SmartChimp, by @TheMonk3yb0ts. Available on the App Store!"];
-        [twitterController addURL:[NSURL URLWithString:@"http://twitter.com"]];
+        [twitterController addURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/smart-chimp-critical-thinking/id972549995?ls=1&mt=8"]];
         [twitterController setCompletionHandler:completionHandler];
         
         [self presentViewController:twitterController animated:YES completion:nil];
